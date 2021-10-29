@@ -4,6 +4,7 @@ import com.example.userservice.VO.Order;
 import com.example.userservice.VO.ReponseTemplateVO;
 import com.example.userservice.entity.User;
 import com.example.userservice.repositories.UserRepository;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    @Retry(name ="basic")
+    //@Retry(name ="basic")
+    @RateLimiter(name ="basicExample")
     public ReponseTemplateVO getUserWithOrder(Long studentId) {
         ReponseTemplateVO vo = new ReponseTemplateVO();
         User user = userRepository.findById(studentId).get();

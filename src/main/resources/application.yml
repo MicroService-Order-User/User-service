@@ -5,9 +5,25 @@ spring:
     config:
       uri: http://localhost:8888
 
+#resilience4j:
+#  retry:
+#    instances:
+#      basic:
+#        maxRetryAttemps: 5
+#        waitDuration: 3s
+
+
 resilience4j:
-  retry:
+  ratelimiter:
     instances:
-      basic:
-        maxRetryAttemps: 5
-        waitDuration: 3s
+      basicExample:
+        limitForPeriod: 2
+        limitRefreshPeriod: 10s
+        timeoutDuration: 10s
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

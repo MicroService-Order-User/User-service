@@ -24,6 +24,9 @@ public class UserController {
 //    }
     @GetMapping({"/{id}"})
     public ReponseTemplateVO getUserWithOrder(@PathVariable("id") Long userId){
+        for(int i =0; i<10;i++){
+            System.out.println(i + " " +userService.getUserWithOrder(userId));
+        }
         return userService.getUserWithOrder(userId);
     }
 
